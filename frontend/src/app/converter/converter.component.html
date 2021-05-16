@@ -1,0 +1,80 @@
+<div class="flex flex-col bg-blue-400 mt-6 rounded-2xl pt-0 pb-10 px-0">
+  <h1
+    class="
+      text-3xl text-center text-blue-100
+      rounded-2xl rounded-b-none
+      bg-blue-600
+      p-3
+      mb-4
+    "
+  >
+    Temperature Converter
+  </h1>
+  <form class="flex flex-col mt-5 px-10" [formGroup]="form">
+    <div class="flex flex-col align-start">
+      <div class="text-2xl flex flex-row">
+        <input
+          id="value"
+          type="number"
+          placeholder="Enter a value"
+          formControlName="value"
+          class="
+            text-blue-500
+            border border-transparent
+            focus:outline-none
+            focus:ring-2 focus:ring-blue-600
+            focus:border-transparent
+            rounded-lg
+            p-2
+          "
+        />
+        <p class="text-white ml-4 mr-0 self-end">from</p>
+        <button
+          type="button"
+          class="
+            text-white
+            rounded-xl rounded-r-none
+            bg-blue-600
+            hover:bg-blue-700
+            focus:outline-none
+            focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50
+            p-3
+            ml-4
+          "
+          (click)="unitSubject?.next('Celsius')"
+          [ngClass]="{
+            'bg-white': (unit | async) === 'Fahrenheit',
+            'text-blue-600': (unit | async) === 'Fahrenheit'
+          }"
+        >
+          Celsius
+        </button>
+        <button
+          type="button"
+          class="
+            text-white
+            bg-blue-600
+            rounded-xl rounded-l-none
+            hover:bg-blue-700
+            focus:outline-none
+            focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50
+            p-3
+          "
+          (click)="unitSubject?.next('Fahrenheit')"
+          [ngClass]="{
+            'bg-white text-blue-600': (unit | async) === 'Celsius',
+            'bg-blue text-white': (unit | async) === 'Fahrenheit'
+          }"
+        >
+          Fahrenheit
+        </button>
+      </div>
+
+      <div class="pt-5 self-center">
+        <p class="min-h-full text-blue-800 pt-4 text-2xl self-center">
+          {{ convertedValue | async }}
+        </p>
+      </div>
+    </div>
+  </form>
+</div>
